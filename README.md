@@ -1,4 +1,46 @@
-# Semantic Segmentation
+# Semantic Segmentation (Advanced Deep learning project)
+
+## Introduction
+
+In this project the algorithm labels the pixels of a road in images using a Fully Convolutional Network (FCN).
+
+## Architecture
+
+A [pre-trained VGG-16 network](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/vgg.zip) was converted to a fully convolutional network by converting the final fully connected layer to a 1x1 convolution. Also the depth was changed to the number of classes (i.e. road and not-road). This could be considered as an encoder part of the network.
+
+Performance is improved through the use of skip connections, performing 1x1 convolutions. Kernel regularizer is included in each transposed convolution layer to help in segmentation. This section could be considered as a decoder part of the network.
+
+### Optimizer
+
+The loss function for the network is cross-entropy with Adam optimizer.
+
+### Training
+
+The hyperparameters for training are:
+  - keep_prob: 0.7
+  - learning_rate: 5e-04
+  - epochs: 20 (number of batch_size used to train the model)
+  - batch_size: 5
+
+### Results
+
+Loss started with 0.19 and then reduced to 0.04 for the last run.
+
+Below are few resulting images from the last run.
+
+![sample1](./runs/1539956304.2871995/um_000000.png)
+![sample2](./runs/1539956304.2871995/um_000014.png)
+![sample3](./runs/1539956304.2871995/umm_000063.png)
+![sample4](./runs/1539956304.2871995/umm_000015.png)
+![sample5](./runs/1539956304.2871995/uu_000032.png)
+![sample6](./runs/1539956304.2871995/uu_000096.png)
+
+Road segmentation (green color patches) is very good but sometimes non-road sections like cars or trees are also segmented as road. The model is able to segment road correctly at least 80% of the area in most of the images.
+
+---
+
+### Below section is from original Udacity repository
+
 ### Introduction
 In this project, you'll label the pixels of a road in images using a Fully Convolutional Network (FCN).
 
